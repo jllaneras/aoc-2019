@@ -4,12 +4,12 @@ import star3
 
 
 def test_compute_intcode(intcode, expected_result):
-    star3.compute_intcode(intcode)
+    actual_result = star3.compute_intcode(intcode)
 
-    assert len(intcode) == len(expected_result),f'len(intcode) is {len(intcode)} but len(expected_result) is {len(expected_result)}'
+    assert len(actual_result) == len(expected_result),f'len(actual_result) is {len(actual_result)} but len(expected_result) is {len(expected_result)}'
 
     for i in range(len(intcode)):
-        assert intcode[i] == expected_result[i], f'intcode[{i}] is {intcode[i]} but expected_result[{i}] is {expected_result[i]}'
+        assert actual_result[i] == expected_result[i], f'actual_result[{i}] is {actual_result[i]} but expected_result[{i}] is {expected_result[i]}'
 
 
 if __name__ == '__main__':

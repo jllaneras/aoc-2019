@@ -3,28 +3,35 @@
 # https://adventofcode.com/2019/day/2
 
 
-def compute_intcode(intcode):
-    for i in range(0, len(intcode), 4):
-        opcode = intcode[i]
+def compute_intcode(intcode, input1=None, input2=None):
+    output = intcode.copy()
+
+    if input1 is not None:
+        output[1] = input1
+    if input2 is not None:
+        output[2] = input2
+
+    for i in range(0, len(output), 4):
+        opcode = output[i]
         if opcode == 99:
             break
 
-        op1 = intcode[intcode[i+1]]
-        op2 = intcode[intcode[i+2]]
-        result_pos = intcode[i+3]
+        op1 = output[output[i+1]]
+        op2 = output[output[i+2]]
+        result_pos = output[i+3]
 
         if opcode == 1:
-            intcode[result_pos] = op1 + op2
+            output[result_pos] = op1 + op2
         elif opcode == 2:
-            intcode[result_pos] = op1 * op2
+            output[result_pos] = op1 * op2
         else:
             raise ValueError(f'Unknown operand {opcode} at position {i}')
+
+    return output
 
 
 if __name__ == '__main__':
     with open('input.txt') as input:
         intcode = [int(n) for n in input.readline().strip().split(',')]
-        intcode[1] = 12
-        intcode[2] = 2
-        compute_intcode(intcode)
-        print(intcode[0])
+        result = compute_intcode(intcode, 12, 2)
+        print(result[0])
