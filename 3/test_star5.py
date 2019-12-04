@@ -3,8 +3,8 @@
 import star5
 
 
-def test_find_closest_wire_cross_distance(wire_paths, expected_distance):
-    actual_distance = star5.find_closest_wire_cross_distance(wire_paths)
+def test_calculate_distance_to_closest_intersection(wire_paths, expected_distance):
+    actual_distance = star5.calculate_distance_to_closest_intersection(wire_paths)
     assert actual_distance == expected_distance, f'For the following wire paths, the expected distance was {expected_distance} but the distance found was {actual_distance}:\n{wire_paths}'
 
 
@@ -26,5 +26,5 @@ if __name__ == '__main__':
 
     for i, test_input in enumerate(TEST_INPUTS):
         print(f'====Test {i}====')
-        test_find_closest_wire_cross_distance(test_input[0], test_input[1])
+        test_calculate_distance_to_closest_intersection(test_input[0], test_input[1])
         print('Test passed')
