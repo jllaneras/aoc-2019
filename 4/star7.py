@@ -4,22 +4,32 @@
 
 
 def valid_password(password):
-    if len(password) != 6:
-        return False
+    return has_increasing_digits(password) and has_repeated_digits(password)
 
+
+def has_increasing_digits(password):
     prev_n = None
-    double_digit = False
+
     for char in password:
         n = int(char)
+
         if prev_n is not None and prev_n > n:
             return False
 
-        if prev_n == n:
-            double_digit = True
-
         prev_n = n
 
-    return double_digit
+    return True
+
+
+def has_repeated_digits(password):
+    prev_char = None
+
+    for char in password:
+        if prev_char == char:
+            return True
+        prev_char = char
+
+    return False
 
 
 if __name__ == '__main__':
