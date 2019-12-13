@@ -22,7 +22,5 @@ E)J
 J)K
 K)L
 """
-
     test_star11(orbits, expected_number_of_orbits=42)
     print("Test passed")
-

@@ -1,32 +1,38 @@
 #!/usr/bin/env python3
 
 
-def count_orbits(orbit_map):
-    orbit_map = orbit_map.strip()
-    orbit_map = [line.split(')') for line in orbit_map.split('\n')]
-    
-    orbit_dict = {}
-
-    # each key is an orbiting object that orbits around the object stored in its value
-    for orbit in orbit_map:
-        obj = orbit[0]
-        orbiting_obj = orbit[1]
-        orbit_dict[orbiting_obj] = obj
+def count_orbits(orbit_map_str):
+    orbit_map = parse_orbit_map(orbit_map_str)
 
     result = 0
-    for obj in orbit_dict.keys():
-        result += _count_orbits_object(obj, orbit_dict)
+    for obj in orbit_map.keys():
+        result += len(path_to_com(obj, orbit_map))
 
     return result
 
 
-def _count_orbits_object(obj, orbit_dict):
+def parse_orbit_map(orbit_map_str):
+    orbit_map_str = orbit_map_str.strip()
+    orbit_map_list = [line.split(')') for line in orbit_map_str.split('\n')]
+    
+    result = {}
+
+    # each key is an orbiting object that orbits around the object stored in its value
+    for orbit in orbit_map_list:
+        obj = orbit[0]
+        orbiting_obj = orbit[1]
+        result[orbiting_obj] = obj
+
+    return result
+
+
+def path_to_com(obj, orbit_dict):
     curr_obj = obj
-    result = 0
+    result = []
 
     while curr_obj != 'COM':
         curr_obj = orbit_dict[curr_obj]
-        result += 1
+        result.append(curr_obj)
 
     return result
 
