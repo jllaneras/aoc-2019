@@ -1,10 +1,12 @@
 from intcode_instructions import INSTRUCTION_SET
 
 class ComputerState:
-    def __init__(self):
-        self.ip = None  # instruction pointer
-        self.memory = []
-        self.halt = None
+    def __init__(self, ip=None, memory=[], halt=None):
+        self.ip = ip  # instruction pointer
+        self.memory = memory
+        self.halt = halt
+        self.last_input = None
+        self.last_output = None
 
 
 class Computer:
@@ -12,10 +14,13 @@ class Computer:
     def __init__(self):
         self.state = ComputerState()
 
-    def run(self, program):
-        self.state.memory.extend(program)
-        self.state.ip = 0
-        self.state.halt = False
+    def load(self, program):
+        parsed_program = [int(n) for n in program.strip().split(',')]
+        self.state = ComputerState(ip=0, memory=parsed_program, halt=False)
+
+    def run(self, program=None):
+        if program:
+            self.load(program)
 
         while not self._program_completed():
             instruction = self._next_instruction()

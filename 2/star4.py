@@ -2,18 +2,30 @@
 
 # https://adventofcode.com/2019/day/2
 
+import sys
+sys.path.insert(0, '../utils/')
+
+from intcode_computer import Computer
+
 import star3
 
 
-if __name__ == '__main__':
+def main():
     with open('input.txt') as input:
-        intcode = [int(n) for n in input.readline().strip().split(',')]
+        program = input.read()
 
+    computer = Computer()
     for noun in range(100):
         for verb in range(100):
-            result = star3.compute_intcode(intcode, noun, verb)
-            if result[0] == 19690720:
-                print(100 * noun + verb)
-                exit(0)
+            computer.load(program)
+            computer.state.memory[1] = noun
+            computer.state.memory[2] = verb
+            computer.run()
+            if computer.state.memory[0] == 19690720:
+                return 100 * noun + verb
 
-    exit(1)
+    throw Exception('Solution not found')
+
+
+if __name__ == '__main__':
+    print(main())

@@ -72,6 +72,7 @@ class Input(Instruction):
     def compute(self):
         result = input("Introduce input: ")
         self._write_result(1, int(result))
+        self.state.last_input = result
         self.state.ip += self.size
 
 
@@ -81,6 +82,7 @@ class Output(Instruction):
     def compute(self):
         param = self._get_param(1)
         print(param)
+        self.state.last_output = param
         self.state.ip += self.size
 
 
