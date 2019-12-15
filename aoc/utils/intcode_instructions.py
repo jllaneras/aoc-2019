@@ -70,12 +70,14 @@ class Input(Instruction):
     size = 2
 
     def compute(self):
-        if len(self.state.input) > 0:
-            result = self.state.input.pop(0)
-        else:
-            result = input("Introduce input: ")
+        if len(self.state.input) == 0:
+            self.state.input_required = True
+            print("Input required")
+            return
+
+        result = self.state.input.pop(0)
         self._write_result(1, int(result))
-        self.state.last_input = result
+        self.state.input_required = False
         self.state.ip += self.size
 
 
@@ -84,6 +86,7 @@ class Output(Instruction):
 
     def compute(self):
         param = self._get_param(1)
+        print(param)
         self.state.output.append(param)
         self.state.ip += self.size
 

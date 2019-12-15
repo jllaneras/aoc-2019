@@ -5,6 +5,7 @@ class ComputerState:
         self.ip = ip  # instruction pointer
         self.memory = memory
         self.halt = halt
+        self.input_required = False
         self.input = []
         self.output = []
 
@@ -22,9 +23,11 @@ class Computer:
         if program:
             self.load(program)
 
-        while not self._program_completed():
+        while not self.program_completed():
             instruction = self._next_instruction()
             instruction.compute()
+            if self.input_required():
+                break
 
     def _parse_opcode(self):
         curr_word = self.state.memory[self.state.ip]
@@ -43,6 +46,17 @@ class Computer:
 
         return instruction
 
-
-    def _program_completed(self):
+    def program_completed(self):
         return self.state.halt or self.state.ip >= len(self.state.memory)
+
+    def input_required(self):
+        return self.state.input_required
+
+    def input(self, input_value):
+        self.state.input.append(input_value)
+
+    def output(self):
+        return self.state.output
+
+    def last_output(self):
+        return self.state.output[-1] if len(self.state.output) > 0 else None

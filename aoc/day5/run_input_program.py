@@ -7,7 +7,7 @@ def run(input_value):
     curr_dir = Path(__file__).parent.absolute()
     with open(curr_dir / 'input.txt') as input:
         computer.load(input.read())
-        computer.state.input.append(input_value)
+        computer.input(input_value)
         computer.run(input.read())
 
-    return computer.state.output[-1]
+    return computer.last_output()

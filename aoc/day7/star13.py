@@ -25,10 +25,10 @@ def amplify_output(intcode_program, phase_setting):
 
     for setting in phase_setting:
         computer.load(intcode_program)
-        computer.state.input.append(setting)
-        computer.state.input.append(last_output)
+        computer.input(setting)
+        computer.input(last_output)
         computer.run()
-        last_output = computer.state.output[-1]
+        last_output = computer.last_output()
 
     return last_output
 
