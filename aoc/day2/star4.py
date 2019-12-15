@@ -1,4 +1,4 @@
-# https://adventofcode.com/2019/day/2
+# https://adventofcode.com/2019/day/2#part2
 
 from aoc.utils.intcode_computer import Computer
 

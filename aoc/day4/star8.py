@@ -1,4 +1,4 @@
-# https://adventofcode.com/2019/day/4
+# https://adventofcode.com/2019/day/4#part2
 
 from aoc.day4.star7 import has_increasing_digits
 

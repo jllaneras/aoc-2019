@@ -1,3 +1,5 @@
+# https://adventofcode.com/2019/day/6
+
 def count_orbits(orbit_map_str):
     orbit_map = parse_orbit_map(orbit_map_str)
 

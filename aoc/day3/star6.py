@@ -1,4 +1,4 @@
-# https://adventofcode.com/2019/day/3
+# https://adventofcode.com/2019/day/3#part2
 
 from aoc.day3.star5 import locations_wire_path, find_intersections
 

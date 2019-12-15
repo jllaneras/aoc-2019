@@ -1,4 +1,4 @@
-# https://adventofcode.com/2019/day/1
+# https://adventofcode.com/2019/day/1#part2
 
 import aoc.day1.star1 as star1
 

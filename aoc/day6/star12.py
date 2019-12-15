@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+# https://adventofcode.com/2019/day/6#part2
 
 from aoc.day6.star11 import parse_orbit_map, path_to_com
 

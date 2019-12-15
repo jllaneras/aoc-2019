@@ -5,8 +5,8 @@ class ComputerState:
         self.ip = ip  # instruction pointer
         self.memory = memory
         self.halt = halt
-        self.last_input = None
-        self.last_output = None
+        self.input = []
+        self.output = []
 
 
 class Computer:
