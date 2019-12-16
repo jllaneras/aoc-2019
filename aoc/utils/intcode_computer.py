@@ -53,10 +53,15 @@ class Computer:
         return self.state.input_required
 
     def input(self, input_value):
-        self.state.input.append(input_value)
+        if type(input_value) is list:
+            self.state.input.extend(input_value)
+        else:
+            self.state.input.append(input_value)
 
     def output(self):
-        return self.state.output
+        output = self.state.output
+        self.state.output = []
+        return output
 
     def last_output(self):
-        return self.state.output[-1] if len(self.state.output) > 0 else None
+        return self.state.output.pop() if len(self.state.output) > 0 else None

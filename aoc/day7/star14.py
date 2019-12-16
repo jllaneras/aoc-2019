@@ -22,23 +22,27 @@ def max_amplified_output(intcode_program):
 
 
 def amplify_output(computer, phase_setting):
+    last_output = 0
     i = 0
-    while not computer.program_completed():
-        computer.run()
+    computer.run()
 
+    while not computer.program_completed():
         if computer.input_required() and i < len(phase_setting):
-            print(f'phase setting {i} -> {phase_setting[i]}')
-            computer.input(phase_setting[i % len(phase_setting)])
+            print(f'phase setting[{i}] = {phase_setting[i]} -> input (i = {i})')
+            computer.input(phase_setting[i])
             computer.run()
 
         if computer.input_required():
-            last_output = computer.last_output() if i > 0 else 0
-            print(f'last output {last_output} to next input (i = {i})')
+            print(f'last_output = {last_output} -> input (i = {i})')
             computer.input(last_output)
+            computer.run()
+
+        last_output = computer.last_output()
 
         i += 1
+        print('=========================')
 
-    return computer.last_output()
+    return last_output
 
 
 def answer():
